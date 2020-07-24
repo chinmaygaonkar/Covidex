@@ -1,5 +1,6 @@
 package com.example.covidex;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,26 +17,37 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.leo.simplearcloader.SimpleArcLoader;
+
+//
+
+//
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     TextView tvCases, tvRecovered, tvCritical, tvActive, tvTodayCases, tvTotalDeaths, tvTodayDeaths, tvAffectedCountries;
     SimpleArcLoader simpleArcLoader;
     ScrollView scrollView;
     PieChart pieChart;
 
+    //
 
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //
+
+        //
 
         tvCases = findViewById(R.id.tvCases);
         tvRecovered = findViewById(R.id.tvRecovered);
@@ -66,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         try {
-                            JSONObject jsonObject = new JSONObject(response.toString());
+                            JSONObject jsonObject = new JSONObject(response);
 
                             tvCases.setText(jsonObject.getString("cases"));
                             tvRecovered.setText(jsonObject.getString("recovered"));
@@ -116,4 +128,13 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(getApplicationContext(), AffectedCountries.class));
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    //
+
+    //
 }

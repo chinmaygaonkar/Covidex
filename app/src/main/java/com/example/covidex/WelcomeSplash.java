@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.util.Objects;
+
 import static java.lang.Thread.sleep;
 
 public class WelcomeSplash extends AppCompatActivity {
@@ -14,14 +16,14 @@ public class WelcomeSplash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_splash);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     sleep(2000);
                     WelcomeSplash.this.finish();
-                    Intent i = new Intent(WelcomeSplash.this, MainActivity.class);
+                    Intent i = new Intent(WelcomeSplash.this, LoginActivity.class);
                     startActivity(i);
 
                 } catch (InterruptedException e) {
